@@ -1,6 +1,8 @@
-package com.aconex.challenge.coding.readers;
+package com.challenge.coding.readers;
 
-import com.aconex.challenge.coding.readers.actions.Readable;
+import java.io.BufferedReader;
+
+import com.challenge.coding.readers.actions.Readable;
 
 public class CommandLineReader implements Readable{
 

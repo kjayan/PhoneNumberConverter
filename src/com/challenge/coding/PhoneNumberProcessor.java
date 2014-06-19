@@ -1,4 +1,4 @@
-package com.aconex.challenge.coding;
+package com.challenge.coding;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package com.aconex.challenge.coding;
+package com.challenge.coding;
 
-import com.aconex.challenge.coding.config.CommonConfig;
-import com.aconex.challenge.coding.constants.CommonConstants;
-import com.aconex.challenge.coding.messages.Messages;
+import com.challenge.coding.config.CommonConfig;
+import com.challenge.coding.constants.CommonConstants;
+import com.challenge.coding.messages.Messages;
 
 public class PhoneNumberConverter {
 

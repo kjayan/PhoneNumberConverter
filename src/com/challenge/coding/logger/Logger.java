@@ -1,4 +1,4 @@
-package com.aconex.challenge.coding.logger;
+package com.challenge.coding.logger;
 
 public class Logger {
 

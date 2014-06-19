@@ -1,4 +1,4 @@
-package com.aconex.challenge.coding.entities;
+package com.challenge.coding.entities;
 
 public class PhoneNumbers {
 
