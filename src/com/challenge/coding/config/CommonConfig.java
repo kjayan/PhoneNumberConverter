@@ -4,9 +4,11 @@ import java.io.BufferedReader;
 
 import com.challenge.coding.constants.CommonConstants;
 import com.challenge.coding.entities.Dictionary;
+import com.challenge.coding.entities.PhoneNumbers;
 import com.challenge.coding.logger.Logger;
 import com.challenge.coding.messages.Messages;
 import com.challenge.coding.readers.DictionaryReader;
+import com.challenge.coding.readers.PhoneNumberReader;
 import com.challenge.coding.util.CommonUtil;
 
 public enum CommonConfig {
@@ -15,6 +17,7 @@ public enum CommonConfig {
 	
 	private Logger logger;
 	private Dictionary dictionary;
+	private PhoneNumbers phoneNumbers;
 	
 	public void initialize(){
 		logger = new Logger();
@@ -26,6 +29,10 @@ public enum CommonConfig {
 	
 	public Dictionary getDictionary(){
 		return dictionary;
+	}
+	
+	public PhoneNumbers getDefultPhoneNumbers(){
+		return phoneNumbers;
 	}
 	
 	public void loadDefaultDictionary(){
@@ -51,7 +58,12 @@ public enum CommonConfig {
 	}
 	
 	public void loadDefaultPhoneNumbers(){
-		
+		BufferedReader reader = CommonUtil.loadFile(CommonConstants.DEFAULT_PHONE_NUMBER_FILE);
+		if(reader == null){
+			CommonConfig.INSTANCE.getLogger().logError(Messages.DEFAULT_PHONE_NUMBERS_NOT_FOUND);
+		}
+		this.phoneNumbers = new PhoneNumberReader().read(reader);
+		CommonUtil.closeFile(reader);
 	}
 	
 }
