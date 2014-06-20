@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class Dictionary {
+public class Dictionary extends BaseEntity{
 	
 	private Map<String, Set<String>> words;
 
