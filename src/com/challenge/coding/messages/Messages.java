@@ -10,6 +10,8 @@ public class Messages {
 	
 	public static final String DEFAULT_DICTIONARY_NOT_FOUND = "Default dictionary is not valid.Please make sure default dictionary is present.";
 	
+	public static final String DEFAULT_PHONE_NUMBERS_NOT_FOUND = "Default phone numbers file is not valid.Please make sure default phone numbers file is present.";
+	
 	public static final String EMPTY_DICTIONARY_PATH = "The path for custom dictionary is not supplied. \n "
 												+"For loading default dictionary try running again by avoiding -d parameter.";
 		
@@ -18,4 +20,6 @@ public class Messages {
 	public static final String BUFFERED_READER_CLOSE_FAILED = "BufferedReader close failed";
 	
 	public static final String INVALID_WORD_IN_DICTIONARY = "Invalid words present in dictionary.Please rectify and retry";
+	
+	public static final String INVALID_NUMBER_IN_PHONE_NUMBER = "Invalid numbers present in phone number file.Please rectify and retry";
 }

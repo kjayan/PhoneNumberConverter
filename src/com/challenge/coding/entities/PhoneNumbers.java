@@ -1,9 +1,29 @@
 package com.challenge.coding.entities;
 
-public class PhoneNumbers {
+import java.util.ArrayList;
+import java.util.List;
 
+public class PhoneNumbers extends BaseEntity{
+	
+	private List<String> numberList;
+	
 	public PhoneNumbers() {
-		// TODO Auto-generated constructor stub
+		numberList = new ArrayList<String>();
+	}
+	
+	public void addNumber(String number){
+		number = cleanUpNumber(number);
+		numberList.add(number);
+	}
+	
+	public List<String> getNumbers(){
+		return this.numberList;
+	}
+	
+	private String cleanUpNumber(String number){
+		number = number.replaceAll("\\p{Z}","");
+		number = number.replaceAll("\\p{P}","");
+		return number;
 	}
 
 }
