@@ -3,8 +3,8 @@ package com.challenge.coding.readers;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import com.challenge.coding.config.CommonConfig;
 import com.challenge.coding.entities.PhoneNumbers;
+import com.challenge.coding.logger.Logger;
 import com.challenge.coding.messages.Messages;
 import com.challenge.coding.readers.actions.Readable;
 
@@ -33,12 +33,10 @@ public class PhoneNumberReader implements Readable{
 					}
 				}
 			} catch (IOException e) {
-				CommonConfig.INSTANCE.getLogger().logError(Messages.INVALID_NUMBER_IN_PHONE_NUMBER);
+				Logger.INSTANCE.logError(Messages.INVALID_NUMBER_IN_PHONE_NUMBER);
 			}
 		}
 
 		return phoneNumbers;
 	}
-
-
 }

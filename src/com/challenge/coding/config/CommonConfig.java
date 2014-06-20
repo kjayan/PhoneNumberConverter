@@ -14,17 +14,11 @@ import com.challenge.coding.util.CommonUtil;
 public enum CommonConfig {
 	
 	INSTANCE;
-	
-	private Logger logger;
+
 	private Dictionary dictionary;
 	private PhoneNumbers phoneNumbers;
 	
 	public void initialize(){
-		logger = new Logger();
-	}
-	
-	public Logger getLogger(){
-		return logger;
 	}
 	
 	public Dictionary getDictionary(){
@@ -38,7 +32,7 @@ public enum CommonConfig {
 	public void loadDefaultDictionary(){
 		BufferedReader reader = CommonUtil.loadFile(CommonConstants.DEFAULT_DICTIONARY_FILE);
 		if(reader == null){
-			CommonConfig.INSTANCE.getLogger().logError(Messages.DEFAULT_DICTIONARY_NOT_FOUND);
+			Logger.INSTANCE.logError(Messages.DEFAULT_DICTIONARY_NOT_FOUND);
 		}
 		this.dictionary = new DictionaryReader().read(reader);
 		CommonUtil.closeFile(reader);
@@ -47,11 +41,11 @@ public enum CommonConfig {
 	
 	public void loadCustomDictionary(String customDictionaryFile){
 		if(customDictionaryFile == null || customDictionaryFile.trim() == ""){
-			CommonConfig.INSTANCE.getLogger().logError(Messages.EMPTY_DICTIONARY_PATH);
+			Logger.INSTANCE.logError(Messages.EMPTY_DICTIONARY_PATH);
 		}
 		BufferedReader reader = CommonUtil.loadFile(customDictionaryFile);
 		if(reader == null){
-			CommonConfig.INSTANCE.getLogger().logError(Messages.INVALID_DICTIONARY);
+			Logger.INSTANCE.logError(Messages.INVALID_DICTIONARY);
 		}
 		this.dictionary = new DictionaryReader().read(reader);
 		CommonUtil.closeFile(reader);
@@ -60,7 +54,7 @@ public enum CommonConfig {
 	public void loadDefaultPhoneNumbers(){
 		BufferedReader reader = CommonUtil.loadFile(CommonConstants.DEFAULT_PHONE_NUMBER_FILE);
 		if(reader == null){
-			CommonConfig.INSTANCE.getLogger().logError(Messages.DEFAULT_PHONE_NUMBERS_NOT_FOUND);
+			Logger.INSTANCE.logError(Messages.DEFAULT_PHONE_NUMBERS_NOT_FOUND);
 		}
 		this.phoneNumbers = new PhoneNumberReader().read(reader);
 		CommonUtil.closeFile(reader);

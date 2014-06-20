@@ -12,18 +12,10 @@ public class PhoneNumbers extends BaseEntity{
 	}
 	
 	public void addNumber(String number){
-		number = cleanUpNumber(number);
 		numberList.add(number);
 	}
 	
 	public List<String> getNumbers(){
 		return this.numberList;
 	}
-	
-	private String cleanUpNumber(String number){
-		number = number.replaceAll("\\p{Z}","");
-		number = number.replaceAll("\\p{P}","");
-		return number;
-	}
-
 }

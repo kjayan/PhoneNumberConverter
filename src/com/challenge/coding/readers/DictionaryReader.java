@@ -3,9 +3,9 @@ package com.challenge.coding.readers;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import com.challenge.coding.config.CommonConfig;
 import com.challenge.coding.constants.CommonConstants;
 import com.challenge.coding.entities.Dictionary;
+import com.challenge.coding.logger.Logger;
 import com.challenge.coding.messages.Messages;
 import com.challenge.coding.readers.actions.Readable;
 import com.challenge.coding.util.CommonUtil;
@@ -29,7 +29,7 @@ public class DictionaryReader implements Readable {
 					}
 				}
 			} catch (IOException e) {
-				CommonConfig.INSTANCE.getLogger().logError(Messages.INVALID_WORD_IN_DICTIONARY);
+				Logger.INSTANCE.logError(Messages.INVALID_WORD_IN_DICTIONARY);
 			}
 		}
 		return dictionary;

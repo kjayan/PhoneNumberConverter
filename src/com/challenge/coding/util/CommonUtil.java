@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import com.challenge.coding.config.CommonConfig;
+import com.challenge.coding.logger.Logger;
 import com.challenge.coding.messages.Messages;
 
 public class CommonUtil {
@@ -29,7 +29,7 @@ public class CommonUtil {
 				reader.close();
 			}
 		} catch (IOException e) {
-			CommonConfig.INSTANCE.getLogger().logError(Messages.BUFFERED_READER_CLOSE_FAILED);
+			Logger.INSTANCE.logError(Messages.BUFFERED_READER_CLOSE_FAILED);
 		}
 	}
 	

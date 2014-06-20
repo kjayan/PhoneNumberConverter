@@ -1,10 +1,8 @@
 package com.challenge.coding.logger;
 
-public class Logger {
-
-	public Logger() {
-	}
-
+public enum Logger {
+	
+	INSTANCE;
 	
 	public void logError(String errorMessage) {
 		System.err.println(errorMessage);

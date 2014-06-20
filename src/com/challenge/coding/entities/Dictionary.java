@@ -25,5 +25,12 @@ public class Dictionary extends BaseEntity{
 			words.put(key, wordSet);
 		}
 	}
+	
+	public Set<String> getWordSet(String number){
+		if(words.containsKey(number)){
+			return words.get(number);
+		}
+		return new HashSet<String>();
+	}
 
 }
