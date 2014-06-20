@@ -17,11 +17,6 @@ public class DictionaryReader implements Readable {
 	}
 
 	@Override
-	public void read() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	public Dictionary read(BufferedReader reader) {
 		Dictionary dictionary = new Dictionary();
 		String lineRead = "";
@@ -79,6 +74,11 @@ public class DictionaryReader implements Readable {
             }
 		}
 		return key.toString();
+	}
+
+	@Override
+	public void read() {
+
 	}
 
 }
