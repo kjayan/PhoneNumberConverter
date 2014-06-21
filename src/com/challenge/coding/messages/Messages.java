@@ -17,6 +17,10 @@ public class Messages {
 		
 	public static final String LOADING_DEFAULT_DICTIONARY = "No custom dictionary entered. Loading default dictionary.";
 	
+	public static final String NO_PHONE_NUMBERS_FILE = "No custom file with phone numbers entered.";
+	
+	public static final String ENTER_SPECIFIC_NUMBERS = "Press 1 to load some sample phone numbers\nPress 2 to enter specific numbers";
+	
 	public static final String BUFFERED_READER_CLOSE_FAILED = "BufferedReader close failed";
 	
 	public static final String INVALID_WORD_IN_DICTIONARY = "Invalid words present in dictionary.Please rectify and retry";
