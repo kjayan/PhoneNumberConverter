@@ -16,7 +16,8 @@ public class DictionaryReader implements Readable {
 	
 	}
 
-	public Dictionary loadDefaultDictionary(){
+	@Override
+	public Dictionary loadDefault(){
 		BufferedReader reader = CommonUtil.loadFile(CommonConstants.DEFAULT_DICTIONARY_FILE);
 		if(reader == null){
 			Logger.INSTANCE.logError(Messages.DEFAULT_DICTIONARY_NOT_FOUND);
@@ -26,7 +27,8 @@ public class DictionaryReader implements Readable {
 		return dictionary;
 	}
 	
-	public Dictionary loadCustomDictionary(String customDictionaryFile){
+	@Override
+	public Dictionary loadCustom(String customDictionaryFile){
 		if(customDictionaryFile == null || CommonConstants.EMPTY_STRING.equals(customDictionaryFile.trim())){
 			Logger.INSTANCE.logError(Messages.EMPTY_DICTIONARY_PATH);
 		}
@@ -71,28 +73,28 @@ public class DictionaryReader implements Readable {
 		for(int i=0;i<word.length();i++){
 			currentChar = String.valueOf(word.charAt(i));
 			
-			if(CommonConstants.STR_2.contains(currentChar)){
+			if(CommonConstants.NUMBER_2.contains(currentChar)){
                 key.append(2);
             }
-            else if(CommonConstants.STR_3.contains(currentChar)){
+            else if(CommonConstants.NUMBER_3.contains(currentChar)){
                 key.append(3);
             }
-            else if(CommonConstants.STR_4.contains(currentChar)){
+            else if(CommonConstants.NUMBER_4.contains(currentChar)){
                 key.append(4);
             }
-            else if(CommonConstants.STR_5.contains(currentChar)){
+            else if(CommonConstants.NUMBER_5.contains(currentChar)){
                 key.append(5);
             }
-            else if(CommonConstants.STR_6.contains(currentChar)){
+            else if(CommonConstants.NUMBER_6.contains(currentChar)){
                 key.append(6);
             }
-            else if(CommonConstants.STR_7.contains(currentChar)){
+            else if(CommonConstants.NUMBER_7.contains(currentChar)){
                 key.append(7);
             }
-            else if(CommonConstants.STR_8.contains(currentChar)){
+            else if(CommonConstants.NUMBER_8.contains(currentChar)){
                 key.append(8);
             }
-            else if(CommonConstants.STR_9.contains(currentChar)){
+            else if(CommonConstants.NUMBER_9.contains(currentChar)){
                 key.append(9);
             }
 		}

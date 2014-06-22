@@ -21,7 +21,7 @@ public class PhoneNumberConvertTester {
 	@Test
     public void testConvertNumbers(){
        
-		Dictionary dictionary = new DictionaryReader().loadDefaultDictionary();
+		Dictionary dictionary = new DictionaryReader().loadDefault();
       
         List<String> resultObtained = null; 
         Map<String, Set<String>> expectedResult = new HashMap<String, Set<String>>();

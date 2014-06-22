@@ -11,7 +11,7 @@ public class DictionaryLoadTester {
 	@Test
     public void testDictionaryLoading(){
 		
-		Dictionary dictionary = new DictionaryReader().loadDefaultDictionary();
+		Dictionary dictionary = new DictionaryReader().loadDefault();
  
         assertNotNull(dictionary);
     }

@@ -15,6 +15,26 @@ public class PhoneNumberReader implements Readable{
 	public PhoneNumberReader() {
 	}
 
+	@Override
+	public PhoneNumbers loadCustom(String numberFilePath){
+		BufferedReader reader = CommonUtil.loadFile(numberFilePath);
+		PhoneNumbers numbers = this.read(reader);
+		CommonUtil.closeFile(reader);
+		return numbers;
+	}
+	
+	@Override
+	public PhoneNumbers loadDefault(){
+		BufferedReader reader = CommonUtil.loadFile(CommonConstants.DEFAULT_PHONE_NUMBER_FILE);
+		if(reader == null){
+			Logger.INSTANCE.logError(Messages.DEFAULT_PHONE_NUMBERS_NOT_FOUND);
+		}
+		PhoneNumbers numbers = this.read(reader);
+		CommonUtil.closeFile(reader);
+		return numbers;
+	}
+	
+	@Override
 	public PhoneNumbers read(BufferedReader reader){
 		
 		PhoneNumbers phoneNumbers = new PhoneNumbers();
@@ -51,24 +71,6 @@ public class PhoneNumberReader implements Readable{
 				Logger.INSTANCE.logError(Messages.INVALID_NUMBER_IN_PHONE_NUMBER);
 			}
 		}
-
 		return phoneNumbers;
-	}
-	
-	public PhoneNumbers readNumbersFromFile(String numberFilePath){
-		BufferedReader reader = CommonUtil.loadFile(numberFilePath);
-		PhoneNumbers numbers = this.read(reader);
-		CommonUtil.closeFile(reader);
-		return numbers;
-	}
-	
-	public PhoneNumbers loadSamplePhoneNumbers(){
-		BufferedReader reader = CommonUtil.loadFile(CommonConstants.DEFAULT_PHONE_NUMBER_FILE);
-		if(reader == null){
-			Logger.INSTANCE.logError(Messages.DEFAULT_PHONE_NUMBERS_NOT_FOUND);
-		}
-		PhoneNumbers numbers = this.read(reader);
-		CommonUtil.closeFile(reader);
-		return numbers;
 	}
 }
