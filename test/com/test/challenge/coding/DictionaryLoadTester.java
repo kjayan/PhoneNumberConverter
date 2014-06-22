@@ -10,10 +10,10 @@ import com.challenge.coding.readers.DictionaryReader;
 
 public class DictionaryLoadTester {
 	@Test
-    public void testAnalyzeDictionary(){
+    public void testDictionaryLoading(){
 		
 		Dictionary dictionary = new DictionaryReader().loadDefaultDictionary(CommonConstants.DEFAULT_DICTIONARY_FILE);
-		     
+ 
         assertNotNull(dictionary);
     }
 }

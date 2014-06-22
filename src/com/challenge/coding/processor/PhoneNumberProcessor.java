@@ -5,23 +5,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.challenge.coding.config.CommonConfig;
 import com.challenge.coding.constants.CommonConstants;
+import com.challenge.coding.entities.Dictionary;
 import com.challenge.coding.entities.PhoneNumbers;
 import com.challenge.coding.logger.Logger;
 import com.challenge.coding.messages.Messages;
 
 public class PhoneNumberProcessor {
+	
+	Dictionary dictionary;
 
-	public PhoneNumberProcessor() {
+	public PhoneNumberProcessor(Dictionary dictionary) {
+		this.dictionary = dictionary;
 	}
 	
-	public void process(PhoneNumbers phoneNumbers){
+	public void processAndDisplayResult(PhoneNumbers phoneNumbers){
 		List<String> result = null;
 		for(String number:phoneNumbers.getNumbers()){
 			result = convertNumberToWord(number);
 			displayResult(number,result);
 		}
+	}
+	
+	public List<String> process(String number){
+		return convertNumberToWord(number);
 	}
 	
 	private List<String> convertNumberToWord(String number){
@@ -55,7 +62,7 @@ public class PhoneNumberProcessor {
         	for(int end = start+1; end <= cleanedUpNumber.length();end++){
         		
         		tempString = cleanedUpNumber.substring(start,end);
-        		wordSet = CommonConfig.INSTANCE.getDictionary().getWordSet(tempString);
+        		wordSet = this.dictionary.getWordSet(tempString);
         		
         		if(wordSet.isEmpty()){
         			continue;

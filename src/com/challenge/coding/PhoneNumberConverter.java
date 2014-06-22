@@ -12,13 +12,23 @@ import com.challenge.coding.processor.PhoneNumberProcessor;
 import com.challenge.coding.readers.PhoneNumberReader;
 import com.challenge.coding.util.CommonUtil;
 
+/**
+ * 
+ * @author Jayan
+ * Main class for the converter. Takes in User inputs and delegates the work of processing and displays results
+ *
+ */
 public class PhoneNumberConverter{
 
-	private PhoneNumberConverter() {
-	
+	public PhoneNumberConverter(){
+		
 	}
 
 	public static void main(String[] args) {
+		new PhoneNumberConverter().start(args);
+	}
+	
+	private void start(String[] args){
 		
 		CommonConfig.INSTANCE.initialize();
 		PhoneNumbers numbers = null;
@@ -98,8 +108,7 @@ public class PhoneNumberConverter{
 				break;
 		}
 		
-		PhoneNumberProcessor processor = new PhoneNumberProcessor();
-		processor.process(numbers);
-		
+		PhoneNumberProcessor processor = new PhoneNumberProcessor(CommonConfig.INSTANCE.getDictionary());
+		processor.processAndDisplayResult(numbers);
 	}
 }
