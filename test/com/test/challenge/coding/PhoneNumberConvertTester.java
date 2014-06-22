@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import com.challenge.coding.constants.CommonConstants;
 import com.challenge.coding.entities.Dictionary;
 import com.challenge.coding.entities.PhoneNumbers;
 import com.challenge.coding.processor.PhoneNumberProcessor;
@@ -22,7 +21,7 @@ public class PhoneNumberConvertTester {
 	@Test
     public void testConvertNumbers(){
        
-		Dictionary dictionary = new DictionaryReader().loadDefaultDictionary(CommonConstants.DEFAULT_DICTIONARY_FILE);
+		Dictionary dictionary = new DictionaryReader().loadDefaultDictionary();
       
         List<String> resultObtained = null; 
         Map<String, Set<String>> expectedResult = new HashMap<String, Set<String>>();

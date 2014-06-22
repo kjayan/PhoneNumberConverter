@@ -16,8 +16,8 @@ public class DictionaryReader implements Readable {
 	
 	}
 
-	public Dictionary loadDefaultDictionary(String filePath){
-		BufferedReader reader = CommonUtil.loadFile(filePath);
+	public Dictionary loadDefaultDictionary(){
+		BufferedReader reader = CommonUtil.loadFile(CommonConstants.DEFAULT_DICTIONARY_FILE);
 		if(reader == null){
 			Logger.INSTANCE.logError(Messages.DEFAULT_DICTIONARY_NOT_FOUND);
 		}
@@ -25,6 +25,20 @@ public class DictionaryReader implements Readable {
 		CommonUtil.closeFile(reader);
 		return dictionary;
 	}
+	
+	public Dictionary loadCustomDictionary(String customDictionaryFile){
+		if(customDictionaryFile == null || CommonConstants.EMPTY_STRING.equals(customDictionaryFile.trim())){
+			Logger.INSTANCE.logError(Messages.EMPTY_DICTIONARY_PATH);
+		}
+		BufferedReader reader = CommonUtil.loadFile(customDictionaryFile);
+		if(reader == null){
+			Logger.INSTANCE.logError(Messages.INVALID_DICTIONARY);
+		}
+		Dictionary dictionary = new DictionaryReader().read(reader);
+		CommonUtil.closeFile(reader);
+		return dictionary;
+	}
+
 	
 	@Override
 	public Dictionary read(BufferedReader reader) {

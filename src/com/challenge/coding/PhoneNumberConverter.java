@@ -3,12 +3,13 @@ package com.challenge.coding;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import com.challenge.coding.config.CommonConfig;
 import com.challenge.coding.constants.CommonConstants;
+import com.challenge.coding.entities.Dictionary;
 import com.challenge.coding.entities.PhoneNumbers;
 import com.challenge.coding.logger.Logger;
 import com.challenge.coding.messages.Messages;
 import com.challenge.coding.processor.PhoneNumberProcessor;
+import com.challenge.coding.readers.DictionaryReader;
 import com.challenge.coding.readers.PhoneNumberReader;
 import com.challenge.coding.util.CommonUtil;
 
@@ -28,19 +29,25 @@ public class PhoneNumberConverter{
 		new PhoneNumberConverter().start(args);
 	}
 	
+	/**
+	 * Function which takes in the user input and based on that loads the dictionary and phone numbers
+	 * and finally delegates the processing
+	 * @param args
+	 */
 	private void start(String[] args){
 		
-		CommonConfig.INSTANCE.initialize();
 		PhoneNumbers numbers = null;
+		Dictionary dictionary = null;
 		BufferedReader reader = null;
 		String userChoice = "";
 		PhoneNumberReader phoneNumberReader = new PhoneNumberReader();
+		DictionaryReader dictionaryReader = new DictionaryReader();
 		
 		switch(args.length){
 			case 3:
 				
 				if(CommonConstants.MINUS_D_PARAMETER.equals(args[0])){
-					CommonConfig.INSTANCE.loadCustomDictionary(args[1]);
+					dictionary = dictionaryReader.loadCustomDictionary(args[1]);
 				}
 				else{
 					Logger.INSTANCE.logError(Messages.INPUT_NOT_PROPER);
@@ -53,7 +60,7 @@ public class PhoneNumberConverter{
 			case 2:
 				
 				if(CommonConstants.MINUS_D_PARAMETER.equals(args[0])){
-					CommonConfig.INSTANCE.loadCustomDictionary(args[1]);
+					dictionary = dictionaryReader.loadCustomDictionary(args[1]);
 				}
 				else{
 					Logger.INSTANCE.logError(Messages.INPUT_NOT_PROPER);
@@ -80,8 +87,8 @@ public class PhoneNumberConverter{
 			case 1:
 				
 				Logger.INSTANCE.logInfo(Messages.LOADING_DEFAULT_DICTIONARY);
-				CommonConfig.INSTANCE.loadDefaultDictionary();
-				
+				dictionary = dictionaryReader.loadDefaultDictionary(); 
+					
 				Logger.INSTANCE.logInfo(Messages.LOADING_CUSTOM_PHONE_NUMBERS);
 				numbers = phoneNumberReader.readNumbersFromFile(args[0]);		
 				
@@ -89,7 +96,7 @@ public class PhoneNumberConverter{
 				
 			case 0:
 				Logger.INSTANCE.logInfo(Messages.LOADING_DEFAULT_DICTIONARY);
-				CommonConfig.INSTANCE.loadDefaultDictionary();
+				dictionary = dictionaryReader.loadDefaultDictionary(); 
 				
 				Logger.INSTANCE.logInfo(Messages.NO_PHONE_NUMBERS_FILE);
 				Logger.INSTANCE.logInfo(Messages.LOAD_SAMPLE_NUMBERS_OR_ENTER_SPECIFIC_NUMBERS);
@@ -108,7 +115,7 @@ public class PhoneNumberConverter{
 				break;
 		}
 		
-		PhoneNumberProcessor processor = new PhoneNumberProcessor(CommonConfig.INSTANCE.getDictionary());
+		PhoneNumberProcessor processor = new PhoneNumberProcessor(dictionary);
 		processor.processAndDisplayResult(numbers);
 	}
 }
