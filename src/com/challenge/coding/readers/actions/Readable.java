@@ -6,10 +6,6 @@ import com.challenge.coding.entities.BaseEntity;
 
 public interface Readable {
 
-	
-	public abstract void read();
-	
 	public abstract BaseEntity read(BufferedReader reader);
-	
-	
+
 }

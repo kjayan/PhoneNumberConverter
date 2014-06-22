@@ -1,7 +1,7 @@
 package com.challenge.coding;
 
 import java.io.BufferedReader;
-import java.util.Scanner;
+import java.io.InputStreamReader;
 
 import com.challenge.coding.config.CommonConfig;
 import com.challenge.coding.constants.CommonConstants;
@@ -12,54 +12,94 @@ import com.challenge.coding.processor.PhoneNumberProcessor;
 import com.challenge.coding.readers.PhoneNumberReader;
 import com.challenge.coding.util.CommonUtil;
 
-public class PhoneNumberConverter {
+public class PhoneNumberConverter{
 
 	private PhoneNumberConverter() {
 	
 	}
 
 	public static void main(String[] args) {
+		
 		CommonConfig.INSTANCE.initialize();
 		PhoneNumbers numbers = null;
-		if(args.length == 3){
-			if(CommonConstants.MINUS_D_PARAMETER.equals(args[0])){
-				CommonConfig.INSTANCE.loadCustomDictionary(args[1]);
-			}
-			numbers = loadCustomPhoneNumbers(args[2]);
-		}
-		else if(args.length == 1){
-			Logger.INSTANCE.logInfo(Messages.LOADING_DEFAULT_DICTIONARY);
-			CommonConfig.INSTANCE.loadDefaultDictionary();
-			numbers = loadCustomPhoneNumbers(args[0]); 
-			
-		}
-		else{
-			Logger.INSTANCE.logInfo(Messages.LOADING_DEFAULT_DICTIONARY);
-			CommonConfig.INSTANCE.loadDefaultDictionary();
-			Logger.INSTANCE.logInfo(Messages.NO_PHONE_NUMBERS_FILE);
-			Logger.INSTANCE.logInfo(Messages.ENTER_SPECIFIC_NUMBERS);
-			int choice = new Scanner(System.in).nextInt();
-			if(choice == 1){
-				CommonConfig.INSTANCE.loadDefaultPhoneNumbers();
-				numbers = CommonConfig.INSTANCE.getDefultPhoneNumbers();
-			}
-			else if(choice == 2){
-				//wait for custom numbers
-				//store all and process
-				numbers = null;
-			}
-		}
+		BufferedReader reader = null;
+		String userChoice = "";
+		PhoneNumberReader phoneNumberReader = new PhoneNumberReader();
+		
+		switch(args.length){
+			case 3:
 				
+				if(CommonConstants.MINUS_D_PARAMETER.equals(args[0])){
+					CommonConfig.INSTANCE.loadCustomDictionary(args[1]);
+				}
+				else{
+					Logger.INSTANCE.logError(Messages.INPUT_NOT_PROPER);
+				}
+				
+				numbers = phoneNumberReader.readNumbersFromFile(args[2]); 
+				
+				break;
+				
+			case 2:
+				
+				if(CommonConstants.MINUS_D_PARAMETER.equals(args[0])){
+					CommonConfig.INSTANCE.loadCustomDictionary(args[1]);
+				}
+				else{
+					Logger.INSTANCE.logError(Messages.INPUT_NOT_PROPER);
+				}
+				
+				Logger.INSTANCE.logInfo(Messages.NO_PHONE_NUMBERS_FILE);
+				Logger.INSTANCE.logInfo(Messages.LOAD_SAMPLE_NUMBERS_OR_ENTER_SPECIFIC_NUMBERS);
+				
+				reader = new BufferedReader(new InputStreamReader(System.in));
+				userChoice = CommonUtil.readLine(reader);
+				userChoice = userChoice.trim();
+				
+				if(CommonConstants.CHOICE_ONE.equals(userChoice)){
+					numbers = phoneNumberReader.loadSamplePhoneNumbers();
+				}
+				else if(CommonConstants.CHOICE_TWO.equals(userChoice)){
+					Logger.INSTANCE.logInfo(Messages.ENTER_SPECIFIC_NUMBERS_MSG);
+					numbers = phoneNumberReader.readNumbersFromConsole(reader);
+				}
+				CommonUtil.closeFile(reader);
+				
+				break;
+				
+			case 1:
+				
+				Logger.INSTANCE.logInfo(Messages.LOADING_DEFAULT_DICTIONARY);
+				CommonConfig.INSTANCE.loadDefaultDictionary();
+				
+				Logger.INSTANCE.logInfo(Messages.LOADING_CUSTOM_PHONE_NUMBERS);
+				numbers = phoneNumberReader.readNumbersFromFile(args[0]);		
+				
+				break;
+				
+			case 0:
+				Logger.INSTANCE.logInfo(Messages.LOADING_DEFAULT_DICTIONARY);
+				CommonConfig.INSTANCE.loadDefaultDictionary();
+				
+				Logger.INSTANCE.logInfo(Messages.NO_PHONE_NUMBERS_FILE);
+				Logger.INSTANCE.logInfo(Messages.LOAD_SAMPLE_NUMBERS_OR_ENTER_SPECIFIC_NUMBERS);
+				reader = new BufferedReader(new InputStreamReader(System.in));
+				userChoice = CommonUtil.readLine(reader);
+				userChoice = userChoice.trim();
+				if(CommonConstants.CHOICE_ONE.equals(userChoice)){
+					numbers = phoneNumberReader.loadSamplePhoneNumbers();
+				}
+				else if(CommonConstants.CHOICE_TWO.equals(userChoice)){
+					Logger.INSTANCE.logInfo(Messages.ENTER_SPECIFIC_NUMBERS_MSG);
+					numbers = phoneNumberReader.readNumbersFromConsole(reader);
+				}
+				CommonUtil.closeFile(reader);
+		
+				break;
+		}
 		
 		PhoneNumberProcessor processor = new PhoneNumberProcessor();
 		processor.process(numbers);
 		
-	}
-	
-	private static PhoneNumbers loadCustomPhoneNumbers(String numberFilePath){
-		BufferedReader reader = CommonUtil.loadFile(numberFilePath);
-		PhoneNumbers numbers = new PhoneNumberReader().read(reader);
-		CommonUtil.closeFile(reader);
-		return numbers;
 	}
 }

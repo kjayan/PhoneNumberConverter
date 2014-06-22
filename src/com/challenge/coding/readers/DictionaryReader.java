@@ -13,9 +13,19 @@ import com.challenge.coding.util.CommonUtil;
 public class DictionaryReader implements Readable {
 
 	public DictionaryReader() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
+	public Dictionary loadDefaultDictionary(String filePath){
+		BufferedReader reader = CommonUtil.loadFile(filePath);
+		if(reader == null){
+			Logger.INSTANCE.logError(Messages.DEFAULT_DICTIONARY_NOT_FOUND);
+		}
+		Dictionary dictionary  = new DictionaryReader().read(reader);
+		CommonUtil.closeFile(reader);
+		return dictionary;
+	}
+	
 	@Override
 	public Dictionary read(BufferedReader reader) {
 		Dictionary dictionary = new Dictionary();
@@ -33,7 +43,6 @@ public class DictionaryReader implements Readable {
 			}
 		}
 		return dictionary;
-		
 	}
 	
 	private void addWordToDictionary(Dictionary dictionary,String word){
@@ -75,10 +84,4 @@ public class DictionaryReader implements Readable {
 		}
 		return key.toString();
 	}
-
-	@Override
-	public void read() {
-
-	}
-
 }

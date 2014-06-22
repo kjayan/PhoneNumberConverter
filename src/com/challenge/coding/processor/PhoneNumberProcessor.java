@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Set;
 
 import com.challenge.coding.config.CommonConfig;
+import com.challenge.coding.constants.CommonConstants;
 import com.challenge.coding.entities.PhoneNumbers;
 import com.challenge.coding.logger.Logger;
+import com.challenge.coding.messages.Messages;
 
 public class PhoneNumberProcessor {
 
@@ -35,23 +37,22 @@ public class PhoneNumberProcessor {
         
         for(int start = 0;start < cleanedUpNumber.length()-1;start++){
         	
-        	wordSet = null;
-        	tempString = "";
-            remainingString = "";
-            resultString = "";
-            
         	if(start == 1){
-        		appender = cleanedUpNumber.charAt(0) + "-";
+        		appender = String.valueOf(cleanedUpNumber.charAt(0)) + CommonConstants.HYPHEN;
         	}
         	else if(start > 1){
         		break;
         	}
         	else{
-        		appender = "";
+        		appender = CommonConstants.EMPTY_STRING;
         	}
         	
+        	wordSet = null;
+        	tempString = "";
+            remainingString = "";
+            resultString = "";
         	
-        	for(int end = start+1; end < cleanedUpNumber.length();end++){
+        	for(int end = start+1; end <= cleanedUpNumber.length();end++){
         		
         		tempString = cleanedUpNumber.substring(start,end);
         		wordSet = CommonConfig.INSTANCE.getDictionary().getWordSet(tempString);
@@ -67,14 +68,14 @@ public class PhoneNumberProcessor {
         				if(!subResult.isEmpty()){
         					for(String word:wordSet){
         						for(String subWord:subResult){
-        							resultString = appender+word+"-"+subWord;
+        							resultString = appender+word+CommonConstants.HYPHEN+subWord;
         							result.add(resultString.toString());
         						}
         					}
         				}
         				else if(remainingString.length() == 1){
         					for(String word:wordSet){
-        						 resultString = appender+word+"-"+remainingString;
+        						 resultString = appender+word+CommonConstants.HYPHEN+remainingString;
                                  result.add(resultString.toString());
         					}
         				}
@@ -94,25 +95,24 @@ public class PhoneNumberProcessor {
 	private String cleanUpNumber(String number){
 		number = number.replaceAll("\\p{Z}","");
 		number = number.replaceAll("\\p{P}","");
-		
 		try{
 			new BigInteger(number);
 		}catch(NumberFormatException e){
-			number = "";
+			number = CommonConstants.EMPTY_STRING;
 		}
 		return number;
 	}
 	
 	private void displayResult(String number,List<String> resultList){
 		if(resultList.isEmpty()){
-			Logger.INSTANCE.logInfo("For Phone Number "+number+", there are no possible word conversions.");
+			Logger.INSTANCE.logInfo(Messages.FOR_PHONE_NUMBER+number+Messages.NO_POSSIBLE_WORD_CONVERSIONS);
 		}
 		else{
-			Logger.INSTANCE.logInfo("For Phone Number "+number+", possible word conversions are:");
+			Logger.INSTANCE.logInfo(Messages.FOR_PHONE_NUMBER+number+Messages.POSSIBLE_WORD_CONVERSIONS);
 			for(String result:resultList){
 				Logger.INSTANCE.logInfo(result);
 			}
 		}
-		Logger.INSTANCE.logInfo("");
+		Logger.INSTANCE.logInfo(Messages.EMPTY_MESSAGE);
 	}
 }

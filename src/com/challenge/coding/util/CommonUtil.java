@@ -23,6 +23,17 @@ public class CommonUtil {
 		}
 	}
 	
+	public static String readLine(BufferedReader reader){
+		String readLine = "";
+		try{
+			readLine = reader.readLine();
+		}catch(IOException e){
+			Logger.INSTANCE.logInfo(Messages.INPUT_NOT_PROPER);
+			readLine = "";
+		}
+		return readLine;
+	}
+	
 	public static void closeFile(BufferedReader reader){
 		try {
 			if(reader != null){
