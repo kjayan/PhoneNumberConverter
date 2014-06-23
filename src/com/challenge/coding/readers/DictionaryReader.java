@@ -2,6 +2,8 @@ package com.challenge.coding.readers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import com.challenge.coding.constants.CommonConstants;
 import com.challenge.coding.entities.Dictionary;
@@ -18,10 +20,8 @@ public class DictionaryReader implements Readable {
 
 	@Override
 	public Dictionary loadDefault(){
-		BufferedReader reader = CommonUtil.loadFile(CommonConstants.DEFAULT_DICTIONARY_FILE);
-		if(reader == null){
-			Logger.INSTANCE.logError(Messages.DEFAULT_DICTIONARY_NOT_FOUND);
-		}
+		InputStream stream = this.getClass().getResourceAsStream(CommonConstants.DEFAULT_DICTIONARY_FILE);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 		Dictionary dictionary  = new DictionaryReader().read(reader);
 		CommonUtil.closeFile(reader);
 		return dictionary;

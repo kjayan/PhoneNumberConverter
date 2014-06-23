@@ -2,6 +2,8 @@ package com.challenge.coding.readers;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import com.challenge.coding.constants.CommonConstants;
 import com.challenge.coding.entities.PhoneNumbers;
@@ -25,10 +27,8 @@ public class PhoneNumberReader implements Readable{
 	
 	@Override
 	public PhoneNumbers loadDefault(){
-		BufferedReader reader = CommonUtil.loadFile(CommonConstants.DEFAULT_PHONE_NUMBER_FILE);
-		if(reader == null){
-			Logger.INSTANCE.logError(Messages.DEFAULT_PHONE_NUMBERS_NOT_FOUND);
-		}
+		InputStream stream = this.getClass().getResourceAsStream(CommonConstants.DEFAULT_PHONE_NUMBER_FILE);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 		PhoneNumbers numbers = this.read(reader);
 		CommonUtil.closeFile(reader);
 		return numbers;

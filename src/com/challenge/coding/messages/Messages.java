@@ -31,6 +31,9 @@ public class Messages {
 	/** When loading default dictionary**/	
 	public static final String LOADING_DEFAULT_DICTIONARY = "No custom dictionary entered. Loading default dictionary.";
 	
+	/** When loading custom dictionary**/	
+	public static final String LOADING_CUSTOM_DICTIONARY = "Loading custom dictionary";
+	
 	/** When loading phone numbers from custom file**/
 	public static final String LOADING_CUSTOM_PHONE_NUMBERS = "Loading custom phone numbers file.";
 	

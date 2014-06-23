@@ -11,10 +11,10 @@ public class CommonConstants {
 	}
 	
 	/** Path where default dictionary file is stored**/
-	public static final String DEFAULT_DICTIONARY_FILE = "data/dictionary/dictionary";
+	public static final String DEFAULT_DICTIONARY_FILE = "/data/dictionary/dictionary";
 	
 	/** Path where default phone number file is stored**/
-	public static final String DEFAULT_PHONE_NUMBER_FILE = "data/numbers/numbers";
+	public static final String DEFAULT_PHONE_NUMBER_FILE = "/data/numbers/numbers";
 	
 	/** minus d parameter entered while running the program**/
 	public static final String MINUS_D_PARAMETER = "-d";

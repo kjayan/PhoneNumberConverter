@@ -30,6 +30,7 @@ public class CommonUtil {
 			reader = new BufferedReader(new FileReader(filePath));
 			return reader;
 		} catch (FileNotFoundException e) {
+			System.err.println("FileNotFound:"+filePath+"\n"+e.getMessage());
 			return null;
 		}
 	}

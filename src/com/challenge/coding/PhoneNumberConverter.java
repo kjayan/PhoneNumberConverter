@@ -36,7 +36,7 @@ public class PhoneNumberConverter{
 	 * @param args
 	 */
 	private void start(String[] args){
-		
+		Logger.INSTANCE.logInfo(Messages.EMPTY_MESSAGE);
 		PhoneNumbers numbers = null;
 		Dictionary dictionary = null;
 		BufferedReader reader = null;
@@ -51,12 +51,13 @@ public class PhoneNumberConverter{
 			case 3: 
 				
 				if(CommonConstants.MINUS_D_PARAMETER.equals(args[0])){
+					Logger.INSTANCE.logInfo(Messages.LOADING_CUSTOM_DICTIONARY);
 					dictionary = dictionaryReader.loadCustom(args[1]);
 				}
 				else{
 					Logger.INSTANCE.logError(Messages.INPUT_NOT_PROPER);
 				}
-				
+				Logger.INSTANCE.logInfo(Messages.LOADING_CUSTOM_PHONE_NUMBERS);
 				numbers = phoneNumberReader.loadCustom(args[2]); 
 				
 				break;
@@ -65,6 +66,7 @@ public class PhoneNumberConverter{
 			case 2:
 				
 				if(CommonConstants.MINUS_D_PARAMETER.equals(args[0])){
+					Logger.INSTANCE.logInfo(Messages.LOADING_CUSTOM_DICTIONARY);
 					dictionary = dictionaryReader.loadCustom(args[1]);
 				}
 				else{
@@ -121,7 +123,7 @@ public class PhoneNumberConverter{
 		
 				break;
 		}
-		
+		Logger.INSTANCE.logInfo(Messages.EMPTY_MESSAGE);
 		//Call PhoneNumberProcessor.process function to convert and display the result
 		PhoneNumberProcessor processor = new PhoneNumberProcessor(dictionary);
 		processor.processAndDisplayResult(numbers);
