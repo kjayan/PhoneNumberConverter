@@ -23,7 +23,7 @@ public class CommonConstants {
 	public static final String HYPHEN = "-";
 	
 	/** String indicating the end of input of specific numbers**/
-	public static final String END_OF_INPUT = "$exit";
+	public static final String END_OF_INPUT = "$end";
 	
 	/** Empty string**/
 	public static final String EMPTY_STRING = "";
