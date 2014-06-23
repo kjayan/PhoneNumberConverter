@@ -30,15 +30,3 @@ For example, if your program is fed the number:
 One possible line of output is
 ! CALL-ME
 According to the dictionary.
-
-The number encoding on the phone the program will use is:
-
-DIGIT  CHARACTERS
-2 	   ABC
-3 	   DEF
-4 	   GHI
-5 	   JKL
-6 	   MNO
-7 	   PQRS
-8 	   TUV
-9      WXYZ
