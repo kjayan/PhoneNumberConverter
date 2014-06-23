@@ -20,7 +20,7 @@ import com.challenge.coding.readers.DictionaryReader;
  * @author kjayan
  *
  */
-public class PhoneNumberConvertTester {
+public class PhoneNumberTester {
 	
 	/**
 	 * Test function to check if for a sample number, proper converted word is returned

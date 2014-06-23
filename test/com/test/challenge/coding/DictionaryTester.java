@@ -20,7 +20,7 @@ import com.challenge.coding.readers.DictionaryReader;
  * @author kjayan
  *
  */
-public class DictionaryLoadTester {
+public class DictionaryTester {
 	
 	/**
 	 * Test function to check the loading of dictionary is proper
