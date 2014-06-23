@@ -41,8 +41,14 @@ public class PhoneNumberProcessor {
 		return convertNumberToWord(number);
 	}
 	
+	/**
+	 * Function that generates the possible word conversions for the given number
+	 * @param number String containing the number to be converted
+	 * @return {@link List} of {@link String} containing the results
+	 */
 	private List<String> convertNumberToWord(String number){
-		String cleanedUpNumber = cleanUpNumber(number);
+		
+		String cleanedNumber = cleanUpNumber(number);
 		List<String> result = new ArrayList<String>();
 		List<String> subResult = null;
         Set<String> wordSet;
@@ -52,11 +58,17 @@ public class PhoneNumberProcessor {
         String resultString = "";
         String appender = "";
         
-        for(int start = 0;start < cleanedUpNumber.length()-1;start++){
+        for(int start = 0;start < cleanedNumber.length()-1;start++){
+        	
+        	wordSet = null;
+        	tempString = "";
+            remainingString = "";
+            resultString = "";
         	
         	if(start == 1){
-        		appender = String.valueOf(cleanedUpNumber.charAt(0)) + CommonConstants.HYPHEN;
+        		appender = String.valueOf(cleanedNumber.charAt(0)) + CommonConstants.HYPHEN;
         	}
+        	//To prevent 2 consecutive digits from non-conversion
         	else if(start > 1){
         		break;
         	}
@@ -64,33 +76,33 @@ public class PhoneNumberProcessor {
         		appender = CommonConstants.EMPTY_STRING;
         	}
         	
-        	wordSet = null;
-        	tempString = "";
-            remainingString = "";
-            resultString = "";
-        	
-        	for(int end = start+1; end <= cleanedUpNumber.length();end++){
+        	for(int innerStart = start+1; innerStart <= cleanedNumber.length();innerStart++){
         		
-        		tempString = cleanedUpNumber.substring(start,end);
+        		tempString = cleanedNumber.substring(start,innerStart);
         		wordSet = this.dictionary.getWordSetForNumber(tempString);
         		
         		if(wordSet.isEmpty()){
         			continue;
         		}
         		else{
-        			if(end != cleanedUpNumber.length()){
-        				remainingString = cleanedUpNumber.substring(end);
+        			//Didn't reach last digit of number.Processing the remaining part of number
+        			if(innerStart != cleanedNumber.length()){
+        				remainingString = cleanedNumber.substring(innerStart);
         				subResult = convertNumberToWord(remainingString);
         				
         				if(!subResult.isEmpty()){
+        					//For each word in result of parent result
         					for(String word:wordSet){
+        						//For each word in sub result, add to parent word
         						for(String subWord:subResult){
         							resultString = appender+word+CommonConstants.HYPHEN+subWord;
         							result.add(resultString.toString());
         						}
         					}
         				}
+        				//When a single number remains
         				else if(remainingString.length() == 1){
+        					//For each word in word set, append the number
         					for(String word:wordSet){
         						 resultString = appender+word+CommonConstants.HYPHEN+remainingString;
                                  result.add(resultString.toString());
@@ -98,6 +110,7 @@ public class PhoneNumberProcessor {
         				}
         			}
         			else{
+        				//Reached the last digit in number
         				for(String word:wordSet){
         					result.add(appender+word);
         				}
@@ -116,9 +129,9 @@ public class PhoneNumberProcessor {
 	 * @return
 	 */
 	private String cleanUpNumber(String number){
-		number = number.replaceAll("\\p{Z}","");
-		number = number.replaceAll("\\p{P}","");
-		number = number.replaceAll("[A-Za-z]","");
+		number = number.replaceAll("[^0-9]","");
+		//number = number.replaceAll("\D","");
+		//number = number.replaceAll("\\p{P\}","");		
 		try{
 			new BigInteger(number);
 		}catch(NumberFormatException e){

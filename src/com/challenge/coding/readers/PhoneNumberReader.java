@@ -55,6 +55,12 @@ public class PhoneNumberReader implements Readable{
 		return phoneNumbers;
 	}
 	
+	/**
+	 * Function to read the numbers from STDIN one by one.
+	 * The reading is stopped once the string '$end' is entered by the user
+	 * @param reader An instance of {@link PhoneNumbers} containing the list of numbers entered
+	 * @return
+	 */
 	public PhoneNumbers readNumbersFromConsole(BufferedReader reader){
 		
 		PhoneNumbers phoneNumbers = new PhoneNumbers();

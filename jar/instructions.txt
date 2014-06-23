@@ -1,0 +1,26 @@
+Instruction to be followed before running the jar:
+--------------------------------------------------
+
+How to run:
+-----------
+
+Place the jar and from the command prompt, execute the following command.
+
+1. To run the program with default dictionary loaded:
+
+java -jar PhoneNumberConverter.jar
+
+2. To run the program with custom dictionary loaded:
+
+java -jar PhoneNumberConverter.jar -d <dictionary-file-path>
+
+3. To run the program with default dictionary and custom phone number file loaded:
+
+java -jar PhoneNumberConverter.jar <custom-phone-number-file-path>
+
+4. To run the program with custom dictionary and custom phone number file loaded
+
+java -jar PhoneNumberConverter.jar -d <dictionary-file-path> <custom-phone-number-file-path>
+
+
+When no custom phone number file is entered, user will be asked whether to load some sample phone numbers or enter via STDIN

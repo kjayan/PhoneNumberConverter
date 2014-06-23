@@ -1,7 +1,7 @@
 package com.test.challenge.coding;
 
 import static org.junit.Assert.assertEquals;
-
+import static org.junit.Assert.assertTrue;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -75,24 +75,24 @@ public class PhoneNumberTester {
 		List<String> result = processor.process("1-226");
 		assertEquals(2,result.size());
 		
-		assertEquals("1-BAN",result.get(0));
-		assertEquals("1-CAN",result.get(1));
+		assertTrue(result.contains("1-CAN"));
+		assertTrue(result.contains("1-BAN"));
 
 		result.clear();
 
 		result = processor.process("326-1-726");
 		assertEquals(2,result.size());
 		
-		assertEquals("FAN-1-PAN",result.get(0));
-		assertEquals("FAN-1-RAN",result.get(1));
+		assertTrue(result.contains("FAN-1-PAN"));
+		assertTrue(result.contains("FAN-1-RAN"));
 		
 		result.clear();
 		
 		result = processor.process("226-326-1");
 		assertEquals(2,result.size());
 		
-		assertEquals("BAN-FAN-1",result.get(0));
-		assertEquals("CAN-FAN-1",result.get(1));
+		assertTrue(result.contains("BAN-FAN-1"));
+		assertTrue(result.contains("CAN-FAN-1"));
 
 		result.clear();
 	}

@@ -1,2 +1,52 @@
-Instruction to be followed before running the jar:
---------------------------------------------------
+Motive:
+-------
+
+Phone numbers are something which we deal with in our day-to-day life at-least once. Even though multiple other communication
+systems like email, voice & video chat, etc are in place, communication via phone still plays a major role in our lives.
+It is this importance of phone numbers which aroused interest in me to solve this problem. The ultimate goal of converting 
+phone numbers to words which can be remembered easily was another part which attracted me to this problem.
+
+
+Design:
+-------
+PhoneNumberConverter is the starting class. It reads in the dictionary and phone numbers and delegates the work to 
+PhoneNumberProcessor.
+
+PhoneNumberProcessor takes in a Dictionary and PhoneNumbers and generates the possible word conversions for each number.
+It divides the number into substrings. Until a possible conversion for the first part is found, iteration continues. Once the first
+part produces a match, the remaining substring is passed to the same function recursively.Once the entire number is processed, 
+the results are displayed.
+
+Dictionary is loaded into the program using DictionaryReader. PhoneNumbers are loaded into the program using PhoneNumberReader.
+Both readers implement the Readable interface.
+
+To store the dictionary, we have an entity class Dictionary. Using the DictionaryReader ,we load the file, parses the words 
+and validates and stores them. The data structure used is a Map with a number, represented as String, as key and a Set of Strings 
+holding the possible words for the number
+
+To store the list of numbers which are to be processed, we have an entity class PhoneNumbers.Numbers are stored in an ArrayList.
+Required validations are done before storing.
+
+Both the entities, Dictionary and PhoneNumbers extend the BaseEntity. It can hold all the functions common to all entities. As of
+now, it has no particular function. Can be made use of in future.
+
+To log the messages, we have a Logger which is a Singleton implementation. As of now, it logs to the console. In future, the
+implementation can be changed to log to a file too.
+
+The different messages which are used for logging are stored in Messages class. In future, a factory class can be implemented to
+log the messages based on the language preference.
+
+The constants are stored in CommonConstants. 
+
+Test cases are written to test the basic working of dictionary as well as some basic checks on conversion logic to make sure the
+conversion operation produces the right output.
+
+Source code:
+------------
+
+The source code is hosted in github. 
+Github link: https://github.com/kjayan/PhoneNumberConverter
+
+
+
+

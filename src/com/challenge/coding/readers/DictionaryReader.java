@@ -61,12 +61,23 @@ public class DictionaryReader implements Readable {
 		return dictionary;
 	}
 	
+	/**
+	 * Function to add a word to the dictionary.
+	 * Word is converted to uppercase and the corresponding key for the word is found			
+	 * @param dictionary An instance of {@link Dictionary } containing the list of words
+	 * @param word String containing the word to be added to the dictionary
+	 */
 	private void addWordToDictionary(Dictionary dictionary,String word){
 		word = word.toUpperCase();
 		String key = findKey(word);
 		dictionary.addWord(key,word);
 	}
 	
+	/**
+	 * Function to find the key for a given word
+	 * @param word String containing the word for which the key is to be found
+	 * @return String containing the key
+	 */
 	private String findKey(String word){
 		StringBuilder key = new StringBuilder();
 		String currentChar = "";
