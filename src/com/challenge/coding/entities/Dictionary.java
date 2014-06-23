@@ -42,11 +42,24 @@ public class Dictionary extends BaseEntity{
 	 * @param number
 	 * @return
 	 */
-	public Set<String> getWordSet(String number){
+	public Set<String> getWordSetForNumber(String number){
 		if(words.containsKey(number)){
 			return words.get(number);
 		}
 		return new HashSet<String>();
+	}
+	
+	/**
+	 * Function that calculates the number of words stored in the dictionary.
+	 * Used for testing purpose 
+	 * @return int value indicating the number of words
+	 */
+	public int getTotalWords(){
+		int count = 0;
+		for(String key:words.keySet()){
+			count += words.get(key).size();
+		}
+		return count;
 	}
 
 }

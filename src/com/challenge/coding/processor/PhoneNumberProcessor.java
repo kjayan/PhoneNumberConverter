@@ -19,6 +19,10 @@ public class PhoneNumberProcessor {
 		this.dictionary = dictionary;
 	}
 	
+	/**
+	 * Function which takes in the list of phone numbers and prints results for each number
+	 * @param phoneNumbers An instance  of {@link PhoneNumbers} containing all phone numbers to be converted
+	 */
 	public void processAndDisplayResult(PhoneNumbers phoneNumbers){
 		List<String> result = null;
 		for(String number:phoneNumbers.getNumbers()){
@@ -27,6 +31,12 @@ public class PhoneNumberProcessor {
 		}
 	}
 	
+	/**
+	 * Function to process a phone number and return the result
+	 * Used in places where only results are needed for a single number and no need to display the results
+	 * @param number {@link List} of {@link String} containing the results
+	 * @return
+	 */
 	public List<String> process(String number){
 		return convertNumberToWord(number);
 	}
@@ -62,7 +72,7 @@ public class PhoneNumberProcessor {
         	for(int end = start+1; end <= cleanedUpNumber.length();end++){
         		
         		tempString = cleanedUpNumber.substring(start,end);
-        		wordSet = this.dictionary.getWordSet(tempString);
+        		wordSet = this.dictionary.getWordSetForNumber(tempString);
         		
         		if(wordSet.isEmpty()){
         			continue;
@@ -99,9 +109,16 @@ public class PhoneNumberProcessor {
         
 	}
 	
+	/**
+	 * Function to remove all punctuation, white space and alphabets from the number
+	 * Also makes sure it is a proper number by loading into a {@link BigInteger}
+	 * @param number String containing the cleaned up number
+	 * @return
+	 */
 	private String cleanUpNumber(String number){
 		number = number.replaceAll("\\p{Z}","");
 		number = number.replaceAll("\\p{P}","");
+		number = number.replaceAll("[A-Za-z]","");
 		try{
 			new BigInteger(number);
 		}catch(NumberFormatException e){
@@ -110,6 +127,11 @@ public class PhoneNumberProcessor {
 		return number;
 	}
 	
+	/**
+	 * Function to display the results of conversion
+	 * @param number String containing the phone number
+	 * @param resultList {@link List} of {@link String} containing the results of conversion for the number
+	 */
 	private void displayResult(String number,List<String> resultList){
 		if(resultList.isEmpty()){
 			Logger.INSTANCE.logInfo(Messages.FOR_PHONE_NUMBER+number+Messages.NO_POSSIBLE_WORD_CONVERSIONS);
