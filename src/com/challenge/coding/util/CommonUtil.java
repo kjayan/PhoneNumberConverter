@@ -29,7 +29,7 @@ public class CommonUtil {
 		try {
 			reader = new BufferedReader(new FileReader(filePath));
 			return reader;
-		} catch (FileNotFoundException e) {
+		}catch (FileNotFoundException e) {
 			System.err.println("FileNotFound:"+filePath+"\n"+e.getMessage());
 			return null;
 		}
@@ -62,7 +62,7 @@ public class CommonUtil {
 			if(reader != null){
 				reader.close();
 			}
-		} catch (IOException e) {
+		}catch (IOException e) {
 			Logger.INSTANCE.logError(Messages.BUFFERED_READER_CLOSE_FAILED);
 		}
 	}

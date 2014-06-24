@@ -130,8 +130,6 @@ public class PhoneNumberProcessor {
 	 */
 	private String cleanUpNumber(String number){
 		number = number.replaceAll("[^0-9]","");
-		//number = number.replaceAll("\D","");
-		//number = number.replaceAll("\\p{P\}","");		
 		try{
 			new BigInteger(number);
 		}catch(NumberFormatException e){

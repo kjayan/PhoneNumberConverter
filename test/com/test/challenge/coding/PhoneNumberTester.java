@@ -46,6 +46,7 @@ public class PhoneNumberTester {
 	 */
 	@Test
 	public void checkIfNumbersAreLoadedProperly() throws IOException {
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream("Call\nme".getBytes()))); 
 		Dictionary dictionary = new DictionaryReader().read(reader);
 		

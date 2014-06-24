@@ -79,9 +79,12 @@ public class DictionaryReader implements Readable {
 	 * @return String containing the key
 	 */
 	private String findKey(String word){
+		
 		StringBuilder key = new StringBuilder();
 		String currentChar = "";
+		
 		for(int i=0;i<word.length();i++){
+			
 			currentChar = String.valueOf(word.charAt(i));
 			
 			if(CommonConstants.NUMBER_2.contains(currentChar)){

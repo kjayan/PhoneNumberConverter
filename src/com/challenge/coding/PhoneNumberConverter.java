@@ -36,7 +36,10 @@ public class PhoneNumberConverter{
 	 * @param args
 	 */
 	private void start(String[] args){
+		
+		//To diplay an empty line for neat results
 		Logger.INSTANCE.logInfo(Messages.EMPTY_MESSAGE);
+		
 		PhoneNumbers numbers = null;
 		Dictionary dictionary = null;
 		BufferedReader reader = null;
@@ -123,7 +126,9 @@ public class PhoneNumberConverter{
 		
 				break;
 		}
+		//To diplay an empty line for neat results
 		Logger.INSTANCE.logInfo(Messages.EMPTY_MESSAGE);
+		
 		//Call PhoneNumberProcessor.process function to convert and display the result
 		PhoneNumberProcessor processor = new PhoneNumberProcessor(dictionary);
 		processor.processAndDisplayResult(numbers);

@@ -27,7 +27,7 @@ public class DictionaryTester {
 	 */
 	@Test
     public void checkDictionaryLoading(){
-	
+
 		Dictionary dictionary = new DictionaryReader().loadDefault();
  		assertNotNull(dictionary);
     }
@@ -39,6 +39,7 @@ public class DictionaryTester {
 	
 	@Test
 	public void checkIfDictionaryLoadsOnlyAlphabets(){
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream("Test\ndictionary\nload".getBytes()))); 
 		Dictionary dictionary = new DictionaryReader().read(reader);
 		assertEquals(3, dictionary.getTotalWords());
@@ -50,6 +51,7 @@ public class DictionaryTester {
 	 */
 	@Test
 	public void checkIfDictionaryDoesNotLoadDuplicateWords(){
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream("Test\ndictionary\nload\nTest".getBytes()))); 
 		Dictionary dictionary = new DictionaryReader().read(reader);
 		assertEquals(3, dictionary.getTotalWords());
@@ -61,6 +63,7 @@ public class DictionaryTester {
 	 */
 	@Test
 	public void checkIfDictionaryStoresInUpperCase(){
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream("Can\nBan\nTest".getBytes()))); 
 		Dictionary dictionary = new DictionaryReader().read(reader);
 		assertEquals(3, dictionary.getTotalWords());
@@ -81,6 +84,7 @@ public class DictionaryTester {
 	 */
 	@Test
 	public void checkIfDictionaryReturnsCorrectMatch(){
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream("Can\nBan\nFan\nRan\nPan".getBytes()))); 
 		Dictionary dictionary = new DictionaryReader().read(reader);
 		
@@ -103,6 +107,7 @@ public class DictionaryTester {
 	 */
 	@Test
 	public void checkIfDictionaryDoesNotReturnNull(){
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream("Can\nBan\nFan\nRan\nPan".getBytes()))); 
 		Dictionary dictionary = new DictionaryReader().read(reader);
 		assertNotNull(dictionary.getWordSetForNumber("1234567890987654321"));
